@@ -1,46 +1,143 @@
-# Getting Started with Create React App
+# YUYA Portfolio Clone
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A beautiful, modern portfolio website clone inspired by [yuya.framer.website](https://yuya.framer.website/), built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+- **Smooth Animations**: Beautiful page transitions and micro-interactions using Framer Motion
+- **Responsive Design**: Fully responsive design that works on all devices
+- **Modern UI**: Clean, minimal design with elegant typography
+- **Scroll Animations**: Elements animate as they come into view
+- **Mobile Menu**: Elegant mobile navigation with smooth animations
+- **Scroll Progress**: Visual scroll progress indicator
+- **Custom Cursor**: Interactive cursor effects (desktop only)
+- **Magnetic Buttons**: Hover effects that create magnetic attraction
+- **Text Gradients**: Animated gradient text effects
+- **Dark Mode Ready**: Supports dark mode preferences
 
-### `npm start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Node.js 18+ installed on your machine
+- npm or yarn package manager
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone this repository:
+```bash
+git clone <repository-url>
+cd yuya-portfolio-clone
+```
 
-### `npm run build`
+2. Install dependencies:
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🛠️ Built With
 
-### `npm run eject`
+- **[Next.js 14](https://nextjs.org/)** - React framework for production
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[Framer Motion](https://www.framer.com/motion/)** - Animation library for React
+- **[Lucide React](https://lucide.dev/)** - Beautiful icon library
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 📁 Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+├── app/
+│   ├── components/          # Reusable UI components
+│   │   ├── About.tsx       # About section
+│   │   ├── Contact.tsx     # Contact section
+│   │   ├── Cursor.tsx      # Custom cursor component
+│   │   ├── FloatingButton.tsx # Floating contact button
+│   │   ├── Footer.tsx      # Footer component
+│   │   ├── Hero.tsx        # Hero/landing section
+│   │   ├── MobileMenu.tsx  # Mobile navigation menu
+│   │   ├── Navigation.tsx  # Main navigation
+│   │   ├── ScrollIndicator.tsx # Scroll progress indicator
+│   │   └── Work.tsx        # Portfolio/work section
+│   ├── globals.css         # Global styles and Tailwind imports
+│   ├── layout.tsx          # Root layout component
+│   └── page.tsx            # Main page component
+├── public/                 # Static assets
+├── next.config.js          # Next.js configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
+└── package.json            # Project dependencies
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🎨 Key Components
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Hero Section
+- Large typography with animated entrance
+- Profile image with hover effects
+- Email contact with copy-to-clipboard functionality
+- Vertical YASKUMI text with gradient animation
 
-## Learn More
+### Work Section
+- Grid layout showcasing portfolio projects
+- Hover effects with image scaling
+- Staggered animations for project cards
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### About Section
+- Personal information and skills
+- Social media links with hover effects
+- Professional image with subtle animations
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Contact Section
+- Call-to-action with magnetic button effect
+- Contact information with hover animations
+- Smooth scroll to section functionality
+
+## ⚡ Performance Features
+
+- **Code Splitting**: Automatic code splitting with Next.js
+- **Image Optimization**: Optimized images with Next.js Image component
+- **Lazy Loading**: Components and images load as needed
+- **SEO Optimized**: Proper meta tags and semantic HTML
+
+## 🎭 Animation Details
+
+The website features several types of animations:
+
+1. **Page Load Animations**: Smooth fade-in and slide-up effects
+2. **Scroll Animations**: Elements animate when they come into view
+3. **Hover Effects**: Interactive hover states for buttons and links
+4. **Magnetic Buttons**: Buttons that react to mouse proximity
+5. **Text Gradients**: Animated gradient effects on large text
+6. **Parallax Effects**: Subtle parallax scrolling on some elements
+
+## 📱 Responsive Design
+
+The website is fully responsive with breakpoints for:
+- Mobile: 320px - 768px
+- Tablet: 768px - 1024px
+- Desktop: 1024px+
+
+## 🎯 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📄 License
+
+This project is for educational purposes. The original design belongs to the creators of yuya.framer.website.
+
+## 🤝 Contributing
+
+Feel free to fork this project and submit pull requests for any improvements.
+
+---
+
+**Note**: This is a clone/recreation of the original Yuya portfolio website for educational and demonstration purposes. All design credit goes to the original creators.
