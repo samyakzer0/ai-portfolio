@@ -33,7 +33,8 @@ export default function InfiniteScroll({
   pauseOnHover = false,
 }: InfiniteScrollProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+const containerRef = useRef<HTMLDivElement | null>(null);
+
 
   const getTiltTransform = () => {
     if (!isTilted) return "none";
@@ -45,7 +46,6 @@ export default function InfiniteScroll({
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    if (items.length === 0) return;
 
     const divItems = gsap.utils.toArray(container.children) as HTMLElement[];
     if (!divItems.length) return;
