@@ -5,6 +5,20 @@ import './InfiniteScroll.css';
 
 gsap.registerPlugin(Observer);
 
+interface InfiniteScrollProps {
+  width?: string;
+  maxHeight?: string;
+  negativeMargin?: string;
+  items?: { content: React.ReactNode }[];
+  itemMinHeight?: number;
+  isTilted?: boolean;
+  tiltDirection?: "left" | "right";
+  autoplay?: boolean;
+  autoplaySpeed?: number;
+  autoplayDirection?: "up" | "down";
+  pauseOnHover?: boolean;
+}
+
 export default function InfiniteScroll({
   width = "30rem",
   maxHeight = "100%",
@@ -17,9 +31,9 @@ export default function InfiniteScroll({
   autoplaySpeed = 0.5,
   autoplayDirection = "down",
   pauseOnHover = false,
-}) {
-  const wrapperRef = useRef(null);
-  const containerRef = useRef(null);
+}: InfiniteScrollProps) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const getTiltTransform = () => {
     if (!isTilted) return "none";
@@ -33,7 +47,7 @@ export default function InfiniteScroll({
     if (!container) return;
     if (items.length === 0) return;
 
-    const divItems = gsap.utils.toArray(container.children);
+    const divItems = gsap.utils.toArray(container.children) as HTMLElement[];
     if (!divItems.length) return;
 
     const firstItem = divItems[0];
@@ -41,7 +55,8 @@ export default function InfiniteScroll({
     const itemHeight = firstItem.offsetHeight;
     const itemMarginTop = parseFloat(itemStyle.marginTop) || 0;
     const totalItemHeight = itemHeight + itemMarginTop;
-    const totalHeight = (itemHeight * items.length) + (itemMarginTop * (items.length - 1));
+    const totalHeight =
+      itemHeight * items.length + itemMarginTop * (items.length - 1);
 
     const wrapFn = gsap.utils.wrap(-totalHeight, totalHeight);
 
@@ -55,10 +70,10 @@ export default function InfiniteScroll({
       type: "wheel,touch,pointer",
       preventDefault: true,
       onPress: ({ target }) => {
-        target.style.cursor = "grabbing";
+        (target as HTMLElement).style.cursor = "grabbing";
       },
       onRelease: ({ target }) => {
-        target.style.cursor = "grab";
+        (target as HTMLElement).style.cursor = "grab";
       },
       onChange: ({ deltaY, isDragging, event }) => {
         const d = event.type === "wheel" ? -deltaY : deltaY;
@@ -69,49 +84,50 @@ export default function InfiniteScroll({
             ease: "expo.out",
             y: `+=${distance}`,
             modifiers: {
-              y: gsap.utils.unitize(wrapFn)
-            }
+              y: gsap.utils.unitize(wrapFn),
+            },
           });
         });
-      }
+      },
     });
 
-    let rafId;
-    if (autoplay) {
-      const directionFactor = autoplayDirection === "down" ? 1 : -1;
-      const speedPerFrame = autoplaySpeed * directionFactor;
+    let rafId: number;
 
-      const tick = () => {
-        divItems.forEach((child) => {
-          gsap.set(child, {
-            y: `+=${speedPerFrame}`,
-            modifiers: {
-              y: gsap.utils.unitize(wrapFn)
-            }
-          });
+    const stopTicker = () => rafId && cancelAnimationFrame(rafId);
+
+    const tick = () => {
+      divItems.forEach((child) => {
+        gsap.set(child, {
+          y: `+=${autoplaySpeed * (autoplayDirection === "down" ? 1 : -1)}`,
+          modifiers: {
+            y: gsap.utils.unitize(wrapFn),
+          },
         });
-        rafId = requestAnimationFrame(tick);
-      };
+      });
+      rafId = requestAnimationFrame(tick);
+    };
 
+    if (autoplay) {
       rafId = requestAnimationFrame(tick);
 
       if (pauseOnHover) {
-        const stopTicker = () => rafId && cancelAnimationFrame(rafId);
-        const startTicker = () => (rafId = requestAnimationFrame(tick));
-
         container.addEventListener("mouseenter", stopTicker);
-        container.addEventListener("mouseleave", startTicker);
+        container.addEventListener("mouseleave", () => {
+          rafId = requestAnimationFrame(tick);
+        });
 
         return () => {
           observer.kill();
           stopTicker();
           container.removeEventListener("mouseenter", stopTicker);
-          container.removeEventListener("mouseleave", startTicker);
+          container.removeEventListener("mouseleave", () =>
+            requestAnimationFrame(tick)
+          );
         };
       } else {
         return () => {
           observer.kill();
-          rafId && cancelAnimationFrame(rafId);
+          stopTicker();
         };
       }
     }
@@ -128,7 +144,7 @@ export default function InfiniteScroll({
     pauseOnHover,
     isTilted,
     tiltDirection,
-    negativeMargin
+    negativeMargin,
   ]);
 
   return (
@@ -159,10 +175,7 @@ export default function InfiniteScroll({
           }}
         >
           {items.map((item, i) => (
-            <div
-              className='infinite-scroll-item'
-              key={i}
-            >
+            <div className="infinite-scroll-item" key={i}>
               {item.content}
             </div>
           ))}
