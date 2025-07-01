@@ -20,28 +20,28 @@ interface Project {
 const projects: Project[] = [
   {
     id: '1',
-    title: 'Neural Network Optimizer',
-    category: 'Machine Learning',
-    description: 'Advanced AI model optimization system',
+    title: 'ACUTE',
+    category: 'Blockchain',
+    description: 'Blockchain based file transfers.',
     longDescription:
-      'A sophisticated neural network optimization platform that uses cutting-edge algorithms to enhance model performance. Built with TensorFlow and PyTorch, this system automatically fine-tunes hyperparameters and architecture to achieve optimal results. Features include real-time monitoring, automated A/B testing, and performance analytics.',
-    technologies: ['Python', 'TensorFlow', 'PyTorch', 'React', 'FastAPI'],
+      'Securely share your files using blockchain technology and IPFS storage. End-to-end encryption ensures your belongings remain private and accessible.',
+    technologies: ['Ether,js', 'IPFS', 'Ethereum', 'React', 'Solidity'],
     image: '/api/placeholder/600/400',
-    demoUrl: 'https://demo.samyak.ai',
-    githubUrl: 'https://github.com/samyak/neural-optimizer',
+    demoUrl: 'https://acutev2.vercel.app/',
+    githubUrl: 'https://github.com/samyakzer0/acutev2',
     featured: true
   },
   {
     id: '2',
-    title: 'AI Automation Suite',
-    category: 'Automation',
-    description: 'Intelligent workflow automation platform',
+    title: 'MirrorMe',
+    category: 'Real-time Feedbacks',
+    description: 'Real-time insights on your speaking habits',
     longDescription:
-      'Comprehensive automation platform that leverages AI to streamline business processes. Features include natural language processing for document analysis, computer vision for quality control, and predictive analytics for resource optimization. Reduces manual work by up to 80% across various industries.',
-    technologies: ['Node.js', 'OpenAI', 'MongoDB', 'Docker', 'Kubernetes'],
+      'MirrorMe.AI is an AI-powered real-time feedback system designed to help users improve their speaking habits during live voice or video calls (like Zoom, Google Meet, etc.).',
+    technologies: ['OpenAI GPT4', 'HuggingFace Interference API', 'Whisper'],
     image: '/api/placeholder/600/400',
-    demoUrl: 'https://automation.samyak.ai',
-    githubUrl: 'https://github.com/samyak/ai-automation',
+    demoUrl: 'https://mirrorme-ai.vercel.app/',
+    githubUrl: 'https://github.com/samyakzer0/mirrorme.ai',
     featured: true
   },
   {
