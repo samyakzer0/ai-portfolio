@@ -46,28 +46,28 @@ const projects: Project[] = [
   },
   {
     id: '3',
-    title: 'Smart Analytics Dashboard',
-    category: 'Data Science',
-    description: 'Real-time AI-powered analytics platform',
+    title: 'Nivaran',
+    category: 'Civic Technology',
+    description: 'AI-powered civic issue reporting platform',
     longDescription:
-      'Interactive dashboard that provides real-time insights using machine learning algorithms. Features predictive modeling, anomaly detection, and automated reporting. Built for enterprise-scale data processing with support for multiple data sources and custom visualization tools.',
-    technologies: ['React', 'D3.js', 'Python', 'PostgreSQL', 'Redis'],
+      'Comprehensive civic issue reporting and resolution platform with IoT integration for smart cameras and regional language support. Features real-time issue tracking, automated categorization, and citizen engagement tools. Includes admin dashboard for municipal authorities with analytics and priority-based issue resolution workflows.',
+    technologies: ['ViteJS', 'Node.js', 'IoT', 'AI/ML', 'IPFS'],
     image: '/api/placeholder/600/400',
-    demoUrl: 'https://analytics.samyak.ai',
-    githubUrl: 'https://github.com/samyak/smart-analytics',
-    featured: false
+    demoUrl: 'https://nivaran-app.vercel.app',
+    githubUrl: 'https://github.com/samyakzer0/civic-go',
+    featured: true
   },
   {
     id: '4',
-    title: 'Conversational AI Bot',
-    category: 'Natural Language Processing',
-    description: 'Advanced chatbot with contextual understanding',
+    title: 'IconSpot',
+    category: 'Web Tools',
+    description: 'Comprehensive icon generation platform',
     longDescription:
-      'Next-generation conversational AI that understands context, maintains conversation history, and provides intelligent responses. Integrated with multiple APIs and databases to provide accurate, real-time information. Features multi-language support and sentiment analysis.',
-    technologies: ['Python', 'OpenAI', 'LangChain', 'FastAPI', 'WebSocket'],
+      'Modern web application for discovering icons.  Built with clean UI/UX design principles to provide seamless browsing experience.',
+    technologies: ['React', 'Next.js', 'Vercel', 'API Integration'],
     image: '/api/placeholder/600/400',
-    demoUrl: 'https://chatbot.samyak.ai',
-    githubUrl: 'https://github.com/samyak/ai-chatbot',
+    demoUrl: 'https://iconspot.vercel.app',
+    githubUrl: 'https://github.com/samyakzer0/iconspot',
     featured: false
   }
 ]

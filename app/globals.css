@@ -36,7 +36,6 @@ body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
   overflow-x: hidden;
-  cursor: none; /* Hide default cursor for ribbon effect */
 }
 
 .text-gradient {

@@ -10,8 +10,7 @@ import About from './components/About'
 import TechStack from './components/TechStack'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import ScrollIndicator from './components/ScrollIndicator'
-import FloatingButton from './components/FloatingButton'
+import ScrollProgress from './components/ScrollProgress'
 
 export default function Home() {
   const [showLoader, setShowLoader] = useState(true)
@@ -28,7 +27,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="min-h-screen bg-white dark:bg-black text-black dark:text-white"
           >
-            <ScrollIndicator />
+            <ScrollProgress />
+      
             <Navigation />
             <Hero />
             <Work />
@@ -36,7 +36,6 @@ export default function Home() {
             <TechStack />
             <Contact />
             <Footer />
-            <FloatingButton />
           </motion.main>
         )}
       </AnimatePresence>

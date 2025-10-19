@@ -43,22 +43,23 @@ export default function Contact() {
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <motion.button
-                whileHover={{ 
-                  scale: 1.05, 
+              <motion.a
+                href="mailto:samyak.sage@gmail.com?subject=Let's Build Something Amazing&body=Hi Samyak, I'd love to discuss a project with you."
+                whileHover={{
+                  scale: 1.05,
                   y: -8,
                   boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)"
                 }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 400, 
-                  damping: 17 
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 17
                 }}
-                className="bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 magnetic-button"
+                className="inline-block bg-black dark:bg-white text-white dark:text-black px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 magnetic-button cursor-pointer"
               >
                 Get in Touch
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             <motion.div
