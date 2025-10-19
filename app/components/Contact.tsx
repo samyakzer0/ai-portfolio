@@ -75,19 +75,33 @@ export default function Contact() {
               
               <div className="space-y-3">
                 <motion.a
-                  href="tel:+15551234567"
+                  href="https://github.com/samyakzer0"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ x: 10 }}
                   className="flex items-center text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
                 >
-                  +91702473XXX
+                  GitHub
                 </motion.a>
-                
+
                 <motion.a
-                  href="mailto:hello@samyak.ai"
+                  href="https://linkedin.com/in/samyakzer0"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ x: 10 }}
                   className="flex items-center text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
                 >
-                  hello@samyak.ai
+                  LinkedIn
+                </motion.a>
+
+                <motion.a
+                  href="https://x.com/samyceo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ x: 10 }}
+                  className="flex items-center text-lg hover:text-gray-600 dark:hover:text-gray-400 transition-colors"
+                >
+                  Twitter
                 </motion.a>
               </div>
             </motion.div>
