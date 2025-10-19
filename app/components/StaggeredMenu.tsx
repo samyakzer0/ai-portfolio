@@ -80,9 +80,9 @@ export const StaggeredMenu = ({
       const textInner = textInnerRef.current;
       if (!panel || !plusH || !plusV || !icon || !textInner) return;
 
-      let preLayers = [];
+      let preLayers: HTMLElement[] = [];
       if (preContainer) {
-        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
+        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer')) as HTMLElement[];
       }
       preLayerElsRef.current = preLayers;
 
