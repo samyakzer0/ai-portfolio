@@ -27,7 +27,7 @@ export const StaggeredMenu = ({
   openMenuButtonColor = '#fff',
   accentColor = '#5227FF',
   changeMenuColorOnOpen = true,
-  isFixed = false,
+  isFixed = true,
   onMenuOpen,
   onMenuClose
 }: {
@@ -409,7 +409,6 @@ export const StaggeredMenu = ({
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
-          <span className="sm-logo-text">SAMYAK</span>
         </div>
         <button
           ref={toggleBtnRef}
