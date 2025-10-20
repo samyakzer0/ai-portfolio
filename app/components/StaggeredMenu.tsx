@@ -50,7 +50,7 @@ export const StaggeredMenu = ({
   const [open, setOpen] = useState(false);
   const openRef = useRef(false);
   const panelRef = useRef<HTMLDivElement>(null);
-  const preLayersRef = useRef(null);
+  const preLayersRef = useRef<HTMLDivElement>(null);
   const preLayerElsRef = useRef<HTMLDivElement[]>([]);
   const plusHRef = useRef<HTMLSpanElement>(null);
   const plusVRef = useRef<HTMLSpanElement>(null);
@@ -71,7 +71,7 @@ export const StaggeredMenu = ({
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
-      const preContainer = preLayersRef.current;
+      const preContainer = preLayersRef.current!;
       const plusH = plusHRef.current;
       const plusV = plusVRef.current;
       const icon = iconRef.current;
