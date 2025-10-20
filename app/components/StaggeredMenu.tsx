@@ -58,10 +58,8 @@ export const StaggeredMenu = ({
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
   const [textLines, setTextLines] = useState(['Menu', 'Close']);
-  const [headerVisible, setHeaderVisible] = useState(true);
 
   const openTlRef = useRef<GSAPTimeline | null>(null);
-  const headerTweenRef = useRef<GSAPTween | null>(null);
   const closeTweenRef = useRef<GSAPTween | null>(null);
   const spinTweenRef = useRef<GSAPTween | null>(null);
   const textCycleAnimRef = useRef<GSAPTween | null>(null);
@@ -80,9 +78,9 @@ export const StaggeredMenu = ({
       const textInner = textInnerRef.current;
       if (!panel || !plusH || !plusV || !icon || !textInner) return;
 
-      let preLayers: HTMLElement[] = [];
+      let preLayers = [];
       if (preContainer) {
-        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer')) as HTMLElement[];
+        preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
       }
       preLayerElsRef.current = preLayers;
 
@@ -355,71 +353,6 @@ export const StaggeredMenu = ({
     }, 300); // Delay to match menu close animation timing
   }, [closeMenu]);
 
-  const animateHeader = useCallback((visible: boolean) => {
-    const header = document.querySelector('.staggered-menu-header') as HTMLElement;
-    if (!header) return;
-
-    headerTweenRef.current?.kill();
-    headerTweenRef.current = gsap.to(header, {
-      y: visible ? 0 : -100,
-      opacity: visible ? 1 : 0,
-      duration: 0.3,
-      ease: 'power2.out',
-      overwrite: 'auto'
-    });
-  }, []);
-
-  const animateToggleButton = useCallback((visible: boolean) => {
-    const toggleButton = toggleBtnRef.current;
-    if (!toggleButton) return;
-
-    const tweenRef = useRef<GSAPTween | null>(null);
-    tweenRef.current?.kill();
-    tweenRef.current = gsap.to(toggleButton, {
-      opacity: visible ? 1 : 0,
-      scale: visible ? 1 : 0.8,
-      duration: 0.3,
-      ease: 'power2.out',
-      overwrite: 'auto'
-    });
-  }, []);
-
-  // Scroll-based header visibility
-  React.useEffect(() => {
-    const handleScroll = () => {
-      const heroSection = document.getElementById('hero');
-      if (!heroSection) return;
-
-      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-      const currentScroll = window.scrollY;
-      const scrollThreshold = 100; // Hide after scrolling 100px into hero
-
-      // Check if we're in the hero section
-      if (currentScroll < heroBottom - scrollThreshold) {
-        // In hero section - hide both header and toggle button after threshold
-        const shouldHide = currentScroll > scrollThreshold;
-        if (shouldHide !== !headerVisible) {
-          setHeaderVisible(!shouldHide);
-          animateHeader(!shouldHide);
-          animateToggleButton(!shouldHide);
-        }
-      } else {
-        // Not in hero section - always show both header and toggle button
-        if (!headerVisible) {
-          setHeaderVisible(true);
-          animateHeader(true);
-          animateToggleButton(true);
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial check
-    handleScroll();
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [headerVisible, animateHeader]);
-
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
     openRef.current = target;
@@ -476,7 +409,7 @@ export const StaggeredMenu = ({
       </div>
       <header className="staggered-menu-header" aria-label="Main navigation header">
         <div className="sm-logo" aria-label="Logo">
-        
+          <span className="sm-logo-text">SAMYAK</span>
         </div>
         <button
           ref={toggleBtnRef}
