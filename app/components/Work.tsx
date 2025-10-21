@@ -26,7 +26,7 @@ const projects: Project[] = [
     longDescription:
       'Securely share your files using blockchain technology and IPFS storage. End-to-end encryption ensures your belongings remain private and accessible.',
     technologies: ['Ether,js', 'IPFS', 'Ethereum', 'React', 'Solidity'],
-    image: '/api/placeholder/600/400',
+    image: '/projects/1/main-screenshot.png',
     demoUrl: 'https://acutev2.vercel.app/',
     githubUrl: 'https://github.com/samyakzer0/acutev2',
     featured: true
@@ -39,7 +39,7 @@ const projects: Project[] = [
     longDescription:
       'MirrorMe.AI is an AI-powered real-time feedback system designed to help users improve their speaking habits during live voice or video calls (like Zoom, Google Meet, etc.).',
     technologies: ['OpenAI GPT4', 'HuggingFace Interference API', 'Whisper'],
-    image: '/api/placeholder/600/400',
+    image: '/projects/2/main-screenshot.png',
     demoUrl: 'https://mirrorme-ai.vercel.app/',
     githubUrl: 'https://github.com/samyakzer0/mirrorme.ai',
     featured: true
@@ -52,7 +52,7 @@ const projects: Project[] = [
     longDescription:
       'Comprehensive civic issue reporting and resolution platform with IoT integration for smart cameras and regional language support. Features real-time issue tracking, automated categorization, and citizen engagement tools. Includes admin dashboard for municipal authorities with analytics and priority-based issue resolution workflows.',
     technologies: ['ViteJS', 'Node.js', 'IoT', 'AI/ML', 'IPFS'],
-    image: '/api/placeholder/600/400',
+    image: '/projects/3/main-screenshot.png',
     demoUrl: 'https://nivaran-app.vercel.app',
     githubUrl: 'https://github.com/samyakzer0/civic-go',
     featured: true
@@ -65,7 +65,7 @@ const projects: Project[] = [
     longDescription:
       'Modern web application for discovering icons.  Built with clean UI/UX design principles to provide seamless browsing experience.',
     technologies: ['React', 'Next.js', 'Vercel', 'API Integration'],
-    image: '/api/placeholder/600/400',
+    image: '/projects/4/main-screenshot.png',
     demoUrl: 'https://iconspot.vercel.app',
     githubUrl: 'https://github.com/samyakzer0/iconspot',
     featured: false
@@ -75,8 +75,17 @@ const projects: Project[] = [
 export default function Work() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
+  const handleProjectClick = (project: Project, e?: React.MouseEvent | React.KeyboardEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    console.log('Project clicked:', project.title);
+    setSelectedProject(project);
+  }
+
   return (
-    <section id="work" className="min-h-screen flex items-center justify-center px-6 py-20">
+    <section id="work" className="min-h-screen flex items-center justify-center px-6 py-20 relative z-20">
       <div className="max-w-6xl mx-auto w-full">
         {/* Section Header - matching existing style */}
         <motion.div
@@ -105,7 +114,7 @@ export default function Work() {
         </motion.div>
 
         {/* Projects Grid - simplified and clean */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative z-10">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -113,14 +122,34 @@ export default function Work() {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedProject(project)}
+              className="group cursor-pointer relative z-10 select-none"
+              onClick={(e) => handleProjectClick(project, e)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleProjectClick(project, e);
+                }
+              }}
+              aria-label={`View details for ${project.title}`}
             >
               <div className="relative overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 transition-all duration-500 hover:-translate-y-1 bg-white/50 dark:bg-black/50 backdrop-blur-sm">
                 
                 {/* Project Image Area */}
-                <div className="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-gray-400 dark:text-gray-600 text-sm">
+                <div className="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden pointer-events-none">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} screenshot`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      const fallbackDiv = e.currentTarget.nextElementSibling as HTMLElement;
+                      if (fallbackDiv) {
+                        fallbackDiv.style.display = 'flex';
+                      }
+                    }}
+                  />
+                  <div className="hidden absolute inset-0 text-gray-400 dark:text-gray-600 text-sm flex items-center justify-center pointer-events-none bg-gray-100 dark:bg-gray-900">
                     {project.title}
                   </div>
                   {project.featured && (
@@ -131,7 +160,7 @@ export default function Work() {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-8">
+                <div className="p-8 pointer-events-none">
                   <div className="text-xs font-medium text-gray-500 dark:text-gray-500 mb-2 uppercase tracking-wider">
                     {project.category}
                   </div>
@@ -148,27 +177,37 @@ export default function Work() {
         </div>
 
         {/* Project Modal - matching existing theme */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {selectedProject && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-6"
-              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center p-4 md:p-6 overflow-y-auto"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedProject(null);
+              }}
+              style={{ pointerEvents: 'auto' }}
             >
               <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.8, opacity: 0, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                className="relative bg-white dark:bg-black border border-gray-200 dark:border-gray-800 max-w-4xl w-full max-h-[90vh] overflow-y-auto my-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Button */}
                 <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors text-gray-600 dark:text-gray-400"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setSelectedProject(null);
+                  }}
+                  className="absolute top-6 right-6 w-8 h-8 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors text-gray-600 dark:text-gray-400 z-10"
+                  aria-label="Close project details"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -192,8 +231,20 @@ export default function Work() {
                   </div>
 
                   {/* Project Preview Area */}
-                  <div className="mb-12 h-64 bg-gray-100 dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-800">
-                    <div className="text-gray-400 dark:text-gray-600">
+                  <div className="mb-12 h-64 bg-gray-100 dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-800 relative overflow-hidden">
+                    <img
+                      src={selectedProject.image}
+                      alt={`${selectedProject.title} preview`}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const fallbackDiv = e.currentTarget.nextElementSibling as HTMLElement;
+                        if (fallbackDiv) {
+                          fallbackDiv.style.display = 'flex';
+                        }
+                      }}
+                    />
+                    <div className="absolute inset-0 text-gray-400 dark:text-gray-600 flex items-center justify-center pointer-events-none">
                       Project Preview
                     </div>
                   </div>

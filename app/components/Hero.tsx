@@ -31,13 +31,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="w-20 h-20 rounded-full overflow-hidden"
               >
-                <Image
-                  src="/samyak-photo.jpg"
-                  alt="Profile Picture"
-                  width={80}
-                  height={80}
-                  className="w-full h-full object-cover"
-                />
+                
               </motion.div>
 
               <motion.div
