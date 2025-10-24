@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ExternalLink, Github } from 'lucide-react'
 
@@ -26,7 +26,7 @@ const projects: Project[] = [
     longDescription:
       'Securely share your files using blockchain technology and IPFS storage. End-to-end encryption ensures your belongings remain private and accessible.',
     technologies: ['Ether,js', 'IPFS', 'Ethereum', 'React', 'Solidity'],
-    image: '/projects/1/main-screenshot.png',
+    image: '/api/placeholder/600/400',
     demoUrl: 'https://acutev2.vercel.app/',
     githubUrl: 'https://github.com/samyakzer0/acutev2',
     featured: true
@@ -39,7 +39,7 @@ const projects: Project[] = [
     longDescription:
       'MirrorMe.AI is an AI-powered real-time feedback system designed to help users improve their speaking habits during live voice or video calls (like Zoom, Google Meet, etc.).',
     technologies: ['OpenAI GPT4', 'HuggingFace Interference API', 'Whisper'],
-    image: '/projects/2/main-screenshot.png',
+    image: '/api/placeholder/600/400',
     demoUrl: 'https://mirrorme-ai.vercel.app/',
     githubUrl: 'https://github.com/samyakzer0/mirrorme.ai',
     featured: true
@@ -52,7 +52,7 @@ const projects: Project[] = [
     longDescription:
       'Comprehensive civic issue reporting and resolution platform with IoT integration for smart cameras and regional language support. Features real-time issue tracking, automated categorization, and citizen engagement tools. Includes admin dashboard for municipal authorities with analytics and priority-based issue resolution workflows.',
     technologies: ['ViteJS', 'Node.js', 'IoT', 'AI/ML', 'IPFS'],
-    image: '/projects/3/main-screenshot.png',
+    image: '/api/placeholder/600/400',
     demoUrl: 'https://nivaran-app.vercel.app',
     githubUrl: 'https://github.com/samyakzer0/civic-go',
     featured: true
@@ -65,7 +65,7 @@ const projects: Project[] = [
     longDescription:
       'Modern web application for discovering icons.  Built with clean UI/UX design principles to provide seamless browsing experience.',
     technologies: ['React', 'Next.js', 'Vercel', 'API Integration'],
-    image: '/projects/4/main-screenshot.png',
+    image: '/api/placeholder/600/400',
     demoUrl: 'https://iconspot.vercel.app',
     githubUrl: 'https://github.com/samyakzer0/iconspot',
     featured: false
@@ -74,6 +74,16 @@ const projects: Project[] = [
 
 export default function Work() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.classList.add('modal-open')
+      window.dispatchEvent(new CustomEvent('modalStateChange', { detail: { open: true } }))
+    } else {
+      document.body.classList.remove('modal-open')
+      window.dispatchEvent(new CustomEvent('modalStateChange', { detail: { open: false } }))
+    }
+  }, [selectedProject])
 
   const handleProjectClick = (project: Project, e?: React.MouseEvent | React.KeyboardEvent) => {
     if (e) {
@@ -137,19 +147,7 @@ export default function Work() {
                 
                 {/* Project Image Area */}
                 <div className="h-48 bg-gray-100 dark:bg-gray-900 flex items-center justify-center relative overflow-hidden pointer-events-none">
-                  <img
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      const fallbackDiv = e.currentTarget.nextElementSibling as HTMLElement;
-                      if (fallbackDiv) {
-                        fallbackDiv.style.display = 'flex';
-                      }
-                    }}
-                  />
-                  <div className="hidden absolute inset-0 text-gray-400 dark:text-gray-600 text-sm flex items-center justify-center pointer-events-none bg-gray-100 dark:bg-gray-900">
+                  <div className="text-gray-400 dark:text-gray-600 text-sm">
                     {project.title}
                   </div>
                   {project.featured && (
@@ -231,20 +229,8 @@ export default function Work() {
                   </div>
 
                   {/* Project Preview Area */}
-                  <div className="mb-12 h-64 bg-gray-100 dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-800 relative overflow-hidden">
-                    <img
-                      src={selectedProject.image}
-                      alt={`${selectedProject.title} preview`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const fallbackDiv = e.currentTarget.nextElementSibling as HTMLElement;
-                        if (fallbackDiv) {
-                          fallbackDiv.style.display = 'flex';
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 text-gray-400 dark:text-gray-600 flex items-center justify-center pointer-events-none">
+                  <div className="mb-12 h-64 bg-gray-100 dark:bg-gray-900 flex items-center justify-center border border-gray-200 dark:border-gray-800">
+                    <div className="text-gray-400 dark:text-gray-600">
                       Project Preview
                     </div>
                   </div>

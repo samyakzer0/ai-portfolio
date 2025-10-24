@@ -337,6 +337,25 @@ export const StaggeredMenu = ({
     }
   }, [playClose, animateIcon, animateColor, animateText, onMenuClose]);
 
+  // Handle modal state changes
+  React.useEffect(() => {
+    const handleModalChange = (e: CustomEvent) => {
+      const wrapper = document.querySelector('.staggered-menu-wrapper');
+      if (e.detail.open) {
+        wrapper?.classList.add('menu-hidden');
+        if (open) {
+          closeMenu();
+        }
+      } else {
+        wrapper?.classList.remove('menu-hidden');
+      }
+    };
+
+    window.addEventListener('modalStateChange', handleModalChange as EventListener);
+
+    return () => window.removeEventListener('modalStateChange', handleModalChange as EventListener);
+  }, [open, closeMenu]);
+
   const handleMenuItemClick = useCallback((link: string) => {
     // Close menu first
     closeMenu();
